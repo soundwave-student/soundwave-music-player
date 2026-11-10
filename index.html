@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A Spotify-inspired music player demo. Discover playlists and play original sample tracks.">
+  <meta name="theme-color" content="#121212">
+  <title>SoundWave — Music for every moment</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Sidebar navigation">
+      <a class="logo" href="#home" aria-label="SoundWave home">
+        <span class="logo-icon" aria-hidden="true">◖</span><span>soundwave</span>
+      </a>
+      <nav class="side-nav" aria-label="Main navigation">
+        <a class="nav-link active" href="#home"><span aria-hidden="true">⌂</span> Home</a>
+        <a class="nav-link" href="#browse"><span aria-hidden="true">⌕</span> Search</a>
+        <a class="nav-link" href="#library"><span aria-hidden="true">▤</span> Your Library</a>
+      </nav>
+      <div class="sidebar-divider"></div>
+      <div class="library-heading">
+        <h2>Your playlists</h2>
+        <button class="small-icon-button" id="createPlaylist" type="button" aria-label="Create a playlist" title="Create playlist">＋</button>
+      </div>
+      <div class="playlist-links">
+        <a href="#made-for-you">Made for you</a>
+        <a href="#popular">Popular this week</a>
+        <a href="#focus">Focus time</a>
+      </div>
+      <div class="sidebar-note">
+        <span aria-hidden="true">♫</span>
+        <p>Music makes every moment better.</p>
+      </div>
+    </aside>
+
+    <div class="main-column">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu" id="mobileMenu" type="button" aria-label="Toggle sidebar" aria-expanded="false">☰</button>
+          <button class="round-arrow" type="button" aria-label="Go back" id="backButton">‹</button>
+          <button class="round-arrow" type="button" aria-label="Go forward" id="forwardButton">›</button>
+        </div>
+        <label class="top-search">
+          <span aria-hidden="true">⌕</span>
+          <span class="visually-hidden">Search music</span>
+          <input id="searchInput" type="search" placeholder="What do you want to play?" autocomplete="off">
+        </label>
+        <div class="top-actions">
+          <a class="premium-link" href="#about">Explore</a>
+          <button class="profile-button" type="button" id="profileButton" aria-label="Demo user profile">JD</button>
+        </div>
+      </header>
+
+      <main id="main" class="content">
+        <section class="welcome-section" id="home" aria-labelledby="welcomeTitle">
+          <p class="greeting" id="greeting">GOOD AFTERNOON</p>
+          <h1 id="welcomeTitle">Your sound. Your moment.</h1>
+          <p class="welcome-subtitle">Find a track for every mood and make today yours.</p>
+          <div class="quick-grid" id="quickGrid" aria-label="Quick picks"></div>
+        </section>
+
+        <section class="music-section" id="made-for-you" aria-labelledby="madeTitle">
+          <div class="section-title-row">
+            <div><p class="section-kicker">PICKED FOR YOU</p><h2 id="madeTitle">Made for your day</h2></div>
+            <a href="#browse" class="show-all">Show all</a>
+          </div>
+          <div class="card-grid" id="featuredGrid"></div>
+        </section>
+
+        <section class="music-section" id="browse" aria-labelledby="browseTitle">
+          <div class="section-title-row">
+            <div><p class="section-kicker">EXPLORE THE COLLECTION</p><h2 id="browseTitle">Browse all music</h2></div>
+          </div>
+          <div class="filter-chips" role="group" aria-label="Filter music by mood">
+            <button class="chip active" type="button" data-filter="All" aria-pressed="true">All</button>
+            <button class="chip" type="button" data-filter="Chill" aria-pressed="false">Chill</button>
+            <button class="chip" type="button" data-filter="Pop" aria-pressed="false">Pop</button>
+            <button class="chip" type="button" data-filter="Focus" aria-pressed="false">Focus</button>
+          </div>
+          <p class="result-message" id="resultMessage" aria-live="polite">Showing all tracks</p>
+          <div class="track-list" id="trackList"></div>
+          <p class="empty-message" id="emptyMessage" hidden>No tracks found. Try another search or filter.</p>
+        </section>
+
+        <section class="music-section about-section" id="about" aria-labelledby="aboutTitle">
+          <div class="about-panel">
+            <div class="about-symbol" aria-hidden="true">♫</div>
+            <div><p class="section-kicker">ABOUT THIS PROJECT</p><h2 id="aboutTitle">A music player made for learning.</h2>
+              <p>SoundWave is a student-built music streaming interface inspired by modern music apps. It demonstrates responsive design and JavaScript interactivity using original demo audio.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <footer class="player" aria-label="Audio player">
+    <div class="now-playing">
+      <div class="mini-cover" id="playerCover" aria-hidden="true">♫</div>
+      <div class="now-text"><strong id="playerTitle">Choose a track</strong><span id="playerArtist">SoundWave demo</span></div>
+      <button class="like-button" id="likeButton" type="button" aria-label="Add current track to liked songs" aria-pressed="false">♡</button>
+    </div>
+    <div class="player-center">
+      <div class="player-controls">
+        <button class="control-button" id="shuffleButton" type="button" aria-label="Toggle shuffle" aria-pressed="false">⤨</button>
+        <button class="control-button" id="previousButton" type="button" aria-label="Previous track">|◀</button>
+        <button class="play-button" id="playButton" type="button" aria-label="Play">▶</button>
+        <button class="control-button" id="nextButton" type="button" aria-label="Next track">▶|</button>
+        <button class="control-button" id="repeatButton" type="button" aria-label="Toggle repeat" aria-pressed="false">↻</button>
+      </div>
+      <div class="progress-row">
+        <span id="currentTime">0:00</span>
+        <input id="progressBar" type="range" min="0" max="100" value="0" aria-label="Track progress">
+        <span id="duration">0:14</span>
+      </div>
+    </div>
+    <div class="player-extra">
+      <span aria-hidden="true">🔊</span>
+      <label class="visually-hidden" for="volumeBar">Volume</label>
+      <input id="volumeBar" type="range" min="0" max="1" step="0.05" value="0.75">
+    </div>
+  </footer>
+
+  <audio id="audioPlayer" preload="metadata"></audio>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
